@@ -33,8 +33,11 @@ def find_entering_and_final_bed(f: str, f0: str, f1: str):
     i = 0
     for i in range(0, sleep_data):
         if sleep_levels_data[i]["level"] != "wake":
-            date_s.append(sleep_levels_data[i]["dateTime"][0:10])
-            time_s.append(sleep_levels_data[i]["dateTime"][11:19])
+            dateStr = sleep_levels_data[i]["dateTime"]
+            date = str(datetime.strptime(dateStr, '%Y-%m-%dT%H:%M:%S.%f').date())
+            time = str(datetime.strptime(dateStr, '%Y-%m-%dT%H:%M:%S.%f').time())
+            date_s.append(date)
+            time_s.append(time)
             level_s.append(sleep_levels_data[i]["level"])
             length_s.append(sleep_levels_data[i]["seconds"])
 
