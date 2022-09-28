@@ -85,6 +85,7 @@ def find_entering_and_final_bed(f: str, f0: str, f1: str):
 
     i = 0
     y = len(out)
+    print(len(out))
 
     start_dt = datetime.strptime(sleep_df["date"].iloc[0] + " " + sleep_df["time"].iloc[0], '%Y-%m-%d %H:%M:%S')
     start_steps = []
@@ -118,4 +119,4 @@ def find_entering_and_final_bed(f: str, f0: str, f1: str):
 
 
 if __name__ == '__main__':
-    find_entering_and_final_bed('sleep-2022-09-11.json', 'act_steps-2022-09-10.json', 'act_steps-2022-09-11.json')
+    find_entering_and_final_bed('sleep-2022-09-12.json', 'act_steps-2022-09-11.json', 'act_steps-2022-09-12.json')
