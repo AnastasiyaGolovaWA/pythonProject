@@ -3,13 +3,16 @@ import numpy as np
 from datetime import datetime
 from datetime import date
 
+from feature2.app.service.pandas_service import get_quality_control, get_anonymous, get_flow_steps, \
+    get_subject_flow_history
+
 # %%
 # Reading in the data
 ids = pd.read_csv("IDs.csv")
-qc = pd.read_csv("quality_control.csv")
-anonymous = pd.read_csv("anonymous.csv")
-flow_steps = pd.read_csv("flow_steps.csv")
-subject_flow_history = pd.read_csv("subject_flow_history.csv")
+qc = get_quality_control()
+anonymous = get_anonymous()
+flow_steps = get_flow_steps()
+subject_flow_history = get_subject_flow_history()
 # %%
 subject_id = ids["subject_id"]
 startdates = ids["study_start_date"]
