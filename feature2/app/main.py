@@ -1,7 +1,7 @@
 import pandas
 import sqlalchemy as db
 
-from feature2.app.models.models import FlowSteps, engine, SubjectFlowHistory, Anonymous
+from feature2.app.models.models import FlowSteps, engine, SubjectFlowHistory, Anonymous, QualityControl
 
 
 def converter():
@@ -53,6 +53,27 @@ def converter():
     print("ANONYMOUS")
     print()
     print(anonymous)
+
+    quality_control = pandas.read_sql_query(
+        sql=db.select([QualityControl.id,
+                       QualityControl.study_participant_id,
+                       QualityControl.date,
+                       QualityControl.stream,
+                       QualityControl.type,
+                       QualityControl.series_from,
+                       QualityControl.series_to,
+                       QualityControl.duration,
+                       QualityControl.status,
+                       QualityControl.change_ts,
+                       QualityControl.ingestion_ts,
+                       QualityControl.processing_ts
+                       ]),
+        con=engine
+    )
+
+    print("QUALITY CONTROL")
+    print()
+    print(quality_control)
 
 
 if __name__ == '__main__':
