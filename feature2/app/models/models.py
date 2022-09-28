@@ -1,7 +1,9 @@
+from datetime import datetime
+
 import sqlalchemy as db
-from sqlalchemy import Integer, String, ForeignKey, DateTime
+from sqlalchemy import Integer, String, ForeignKey, DateTime, JSON, Boolean
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 engine = db.create_engine("postgresql://postgres:root@localhost:5432/BackEnd")
@@ -25,3 +27,17 @@ class SubjectFlowHistory(Base):
     event_name = db.Column(String(64), ForeignKey('flow_steps.event_name'), primary_key=True)
     timestamp = db.Column(DateTime(timezone=True), nullable=False)
 
+
+class Anonymous(Base):
+    __tablename__ = 'anonymous'
+    id = db.Column(Integer, primary_key=True)
+    create_ts = db.Column(DateTime, nullable=False, default=datetime.utcnow)
+    pre_screening = db.Column(JSON)
+    anonymous_id = db.Column(UUID, unique=True)
+    user_id = db.Column(Integer, ForeignKey('user.id'), unique=True)
+    active = db.Column(Boolean)
+    email = db.Column(String(1024))
+    future_participate_consent = db.Column(Boolean)
+    current_subject_flow_step_id = db.Column(Integer, ForeignKey('flow_steps.id'), nullable=True)
+    subject_flow_alert_text = db.Column(String(128))
+    subject_flow_alert_create_ts = db.Column(DateTime, nullable=True)
