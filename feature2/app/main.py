@@ -4,8 +4,8 @@ import sqlalchemy as db
 from feature2.app.models.models import FlowSteps, engine, SubjectFlowHistory, Anonymous, QualityControl
 
 
-def converter():
-    quality_control = pandas.read_sql_query(
+def get_flow_steps():
+    flow_steps = pandas.read_sql_query(
         sql=db.select([FlowSteps.id,
                        FlowSteps.subject_status,
                        FlowSteps.detailed_view,
@@ -16,11 +16,11 @@ def converter():
                        ]),
         con=engine
     )
+    print(flow_steps)
+    return flow_steps
 
-    print("QUALITY CONTROL")
-    print()
-    print(quality_control)
 
+def get_subject_flow_history():
     subject_flow_history = pandas.read_sql_query(
         sql=db.select([SubjectFlowHistory.anonymous_id,
                        SubjectFlowHistory.user_id,
@@ -29,11 +29,11 @@ def converter():
                        ]),
         con=engine
     )
-
-    print("SUBJECT FLOW HISTORY")
-    print()
     print(subject_flow_history)
+    return subject_flow_history
 
+
+def get_anonymous():
     anonymous = pandas.read_sql_query(
         sql=db.select([Anonymous.id,
                        Anonymous.create_ts,
@@ -49,11 +49,11 @@ def converter():
                        ]),
         con=engine
     )
-
-    print("ANONYMOUS")
-    print()
     print(anonymous)
+    return anonymous
 
+
+def get_quality_control():
     quality_control = pandas.read_sql_query(
         sql=db.select([QualityControl.id,
                        QualityControl.study_participant_id,
@@ -70,11 +70,9 @@ def converter():
                        ]),
         con=engine
     )
-
-    print("QUALITY CONTROL")
-    print()
     print(quality_control)
+    return quality_control
 
 
 if __name__ == '__main__':
-    converter()
+    get_quality_control()
