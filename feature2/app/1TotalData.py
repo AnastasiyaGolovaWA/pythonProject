@@ -4,11 +4,11 @@ from datetime import datetime
 from datetime import date
 
 from feature2.app.service.pandas_service import get_quality_control, get_anonymous, get_flow_steps, \
-    get_subject_flow_history
+    get_subject_flow_history, get_ids
 
 # %%
 # Reading in the data
-ids = pd.read_csv("IDs.csv")
+ids = get_ids()
 qc = get_quality_control()
 anonymous = get_anonymous()
 flow_steps = get_flow_steps()
