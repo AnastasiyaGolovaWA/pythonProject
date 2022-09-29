@@ -79,7 +79,7 @@ for date in ids["study_start_date"]:
     elif len(str(delta)) == 7:
         delta_int = 0
     else:
-        delta_int = int(str(delta)[0:-14])
+        delta_int = int(str(delta)[:-13])
     if delta_int > 14:
         delta_int = 14
     if delta_int < 0:
