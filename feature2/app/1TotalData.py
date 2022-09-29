@@ -120,8 +120,8 @@ while i < len(qc):
     # filtering for data files marked as successfully uploaded
     if qc["status"][i].name == 'SUCCESS':
         sub_id = qc["subject_id"][i]
-        strm = qc["stream"][i]
-        typ = qc["type"][i]
+        strm = qc["stream"][i].name
+        typ = qc["type"][i].name
         # finding matching subject ID from total data df
         if sub_id != "N/A":
             boolkey = sub_id == totaldata["Subject"]
@@ -136,6 +136,7 @@ while i < len(qc):
                 week_int = int(str(week12)[:-13])
             # determining data file type and adding to current tally of files for that file type and week per subject
             if week_int < 8:
+                print(strm, sub_id, typ)
                 if strm == "sleep" and typ == "fitbit":
                     totaldata.loc[id_key[0], "Fitbit - Sleep"] = totaldata["Fitbit - Sleep"][id_key[0]] + 1
                 elif strm == "hr" and typ == "fitbit":
