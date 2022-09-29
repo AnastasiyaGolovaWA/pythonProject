@@ -1,7 +1,8 @@
 import pandas
 import sqlalchemy as db
 
-from feature2.app.models.models import FlowSteps, engine, SubjectFlowHistory, Anonymous, QualityControl
+from feature2.app.models.models import FlowSteps, engine, SubjectFlowHistory, Anonymous, QualityControl, Subject, \
+    StudyParticipant, Kit, User, Chat
 
 
 def get_flow_steps():
@@ -31,6 +32,19 @@ def get_subject_flow_history():
     )
     print(subject_flow_history)
     return subject_flow_history
+
+
+def get_ids():
+    query = db.select(Subject.subject_id, Subject.id, StudyParticipant.id, StudyParticipant.date, User.id,
+                      User.sub, Anonymous.id, Anonymous.email, Chat.id, Kit.name).filter(
+        Subject.id == StudyParticipant.subject_id).filter(User.id == Subject.user_id).filter(
+        Anonymous.user_id == User.id).filter(Chat.user_sub == User.sub).filter(Kit.id == StudyParticipant.kit_id)
+    ids = pandas.read_sql_query(
+        sql=query,
+        con=engine
+    )
+    print(ids)
+    return ids
 
 
 def get_anonymous():
