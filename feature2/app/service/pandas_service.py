@@ -17,7 +17,6 @@ def get_flow_steps():
                        ]),
         con=engine
     )
-    print(flow_steps)
     return flow_steps
 
 
@@ -30,7 +29,6 @@ def get_subject_flow_history():
                        ]),
         con=engine
     )
-    print(subject_flow_history)
     return subject_flow_history
 
 
@@ -46,7 +44,6 @@ def get_ids():
         sql=query,
         con=engine
     )
-    print(query)
     return ids
 
 
@@ -66,7 +63,6 @@ def get_anonymous():
                        ]),
         con=engine
     )
-    print(anonymous)
     return anonymous
 
 
@@ -87,5 +83,4 @@ def get_quality_control():
                        ]),
         con=engine
     )
-    print(quality_control)
     return quality_control

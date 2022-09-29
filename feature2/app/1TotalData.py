@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 from datetime import date
+from models.phi_enums import QCStatus
 
 from feature2.app.service.pandas_service import get_quality_control, get_anonymous, get_flow_steps, \
     get_subject_flow_history, get_ids
@@ -117,7 +118,7 @@ totaldata["Study App - Sleep Diary"] = [0] * len(subject_id)
 i = 0
 while i < len(qc):
     # filtering for data files marked as successfully uploaded
-    if qc["status"][i] == "SUCCESS":
+    if qc["status"][i].name == 'SUCCESS':
         sub_id = qc["subject_id"][i]
         strm = qc["stream"][i]
         typ = qc["type"][i]
@@ -132,7 +133,7 @@ while i < len(qc):
             elif len(str(week12)) == 7:
                 week_int = 0
             else:
-                week_int = int(str(week12)[0:-14])
+                week_int = int(str(week12)[:-13])
             # determining data file type and adding to current tally of files for that file type and week per subject
             if week_int < 8:
                 if strm == "sleep" and typ == "fitbit":
