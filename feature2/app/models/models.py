@@ -9,7 +9,7 @@ from sqlalchemy.orm import relationship
 from feature2.app.models import phi_enums
 
 Base = declarative_base()
-engine = db.create_engine("postgresql://postgres:root@localhost:5432/BackEnd")
+engine = db.create_engine("postgresql://postgres:root@localhost:5432/phy_demo")
 
 
 class FlowSteps(Base):

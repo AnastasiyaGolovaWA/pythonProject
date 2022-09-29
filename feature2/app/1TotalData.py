@@ -40,8 +40,8 @@ while i < len(qc):
     i += 1
 
 qc["subject_id"] = s_id_list
-qc["sub_start_date"] = [datetime.date(datetime.strptime(b, '%Y-%m-%d')) for b in s_date_list]
-qc["up_date"] = [datetime.date(datetime.strptime(c, '%Y-%m-%d')) for c in upload_date]
+qc["sub_start_date"] = s_date_list
+qc["up_date"] = upload_date
 # %%
 # Determining current subject status
 anon_id = ids["anonymous_id"]
@@ -71,8 +71,8 @@ for stat_int in status_int_list:
 today = date.today()
 date_list = []
 for date in ids["study_start_date"]:
-    start_dt = datetime.strptime(date, '%Y-%m-%d')
-    start_date = datetime.date(start_dt)
+    start_dt = date
+    start_date = start_dt
     delta = today - start_date
     if len(str(delta)) == 14:
         delta_int = 1
