@@ -74,12 +74,7 @@ def get_total_data(filename: str):
         start_dt = date
         start_date = start_dt
         delta = today - start_date
-        if len(str(delta)) == 14:
-            delta_int = 1
-        elif len(str(delta)) == 7:
-            delta_int = 0
-        else:
-            delta_int = delta.days
+        delta_int = delta.days
         if delta_int > 14:
             delta_int = 14
         if delta_int < 0:
@@ -127,12 +122,7 @@ def get_total_data(filename: str):
                 id_key = [j for j, x in enumerate(boolkey) if x]
                 # determining which week the data file was uploaded during
                 week12 = qc["up_date"][i] - qc["sub_start_date"][i]
-                if len(str(week12)) == 14:
-                    week_int = 1
-                elif len(str(week12)) == 7:
-                    week_int = 0
-                else:
-                    week_int = week12.days
+                week_int = week12.days
                 # determining data file type and adding to current tally of files for that file type and week per subject
                 if week_int < 8:
                     if strm == "sleep" and typ == "fitbit":
