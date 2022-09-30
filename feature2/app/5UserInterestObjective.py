@@ -91,7 +91,7 @@ def get_user_interest_objective(filename: str):
     # %%
     # Ordering flow_steps table by chronological study step
     fs_sorted = flow_steps.sort_values("id")
-    sorted_series = fs_sorted["detailed_view"][1:-3]
+    sorted_series = fs_sorted["detailed_view"]
     sorted_list = sorted_series.tolist()
     # %%
     # Creating anonymous id list
@@ -116,9 +116,9 @@ def get_user_interest_objective(filename: str):
     # %%
     # Setting up User Interest - Objective Table pt 2
 
-    sorted_codes = fs_sorted["code"][1:-3]
+    sorted_codes = fs_sorted["code"]
     s_codes_list = sorted_codes.tolist()
-    summ = fs_sorted["simple_view"][1:-3]
+    summ = fs_sorted["simple_view"]
     summ_list = summ.tolist()
 
     i = 0
