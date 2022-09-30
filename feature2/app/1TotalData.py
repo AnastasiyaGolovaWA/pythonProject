@@ -60,7 +60,7 @@ def get_total_data(filename: str):
     for stat_int in status_int_list:
         boolkey = stat_int == flow_steps["id"]
         id_key = [j for j, x in enumerate(boolkey) if x]
-        if id_key != []:
+        if id_key:
             status_code = flow_steps["code"][id_key[0]]
             status_list.append(status_code)
         else:
@@ -79,7 +79,7 @@ def get_total_data(filename: str):
         elif len(str(delta)) == 7:
             delta_int = 0
         else:
-            delta_int = int(str(delta)[:-13])
+            delta_int = delta.days
         if delta_int > 14:
             delta_int = 14
         if delta_int < 0:
@@ -132,7 +132,7 @@ def get_total_data(filename: str):
                 elif len(str(week12)) == 7:
                     week_int = 0
                 else:
-                    week_int = int(str(week12)[:-13])
+                    week_int = week12.days
                 # determining data file type and adding to current tally of files for that file type and week per subject
                 if week_int < 8:
                     if strm == "sleep" and typ == "fitbit":
