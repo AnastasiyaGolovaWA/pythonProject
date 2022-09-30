@@ -2,13 +2,13 @@ import datetime
 
 import pandas as pd
 from feature2.app.service.pandas_service import get_quality_control, get_anonymous, get_flow_steps, \
-    get_subject_flow_history, get_ids
+    get_subject_flow_history, get_ids_total_data
 
 
 def get_total_data(filename: str):
     # %%
     # Reading in the data
-    ids = get_ids()
+    ids = get_ids_total_data()
     qc = get_quality_control()
     anonymous = get_anonymous()
     flow_steps = get_flow_steps()

@@ -32,7 +32,7 @@ def get_subject_flow_history():
     return subject_flow_history
 
 
-def get_ids():
+def get_ids_total_data():
     query = db.select(Subject.subject_id, Subject.id.label('subject_integer_id'),
                       StudyParticipant.id.label('study_participant_id'),
                       StudyParticipant.date.label('study_start_date'), User.id.label('user_id'),
@@ -40,6 +40,24 @@ def get_ids():
                       Kit.name.label('kit_name')).filter(
         Subject.id == StudyParticipant.subject_id).filter(User.id == Subject.user_id).filter(
         Anonymous.user_id == User.id).filter(Chat.user_sub == User.sub).filter(Kit.id == StudyParticipant.kit_id)
+    ids = pandas.read_sql_query(
+        sql=query,
+        con=engine
+    )
+    return ids
+
+
+def get_ids_user_interest():
+    query = db.select(Subject.subject_id, Subject.id.label('subject_integer_id'),
+                      StudyParticipant.id.label('study_participant_id'),
+                      StudyParticipant.date.label('study_start_date'), User.id.label('user_id'),
+                      User.sub.label('user_sub'), Anonymous.anonymous_id, Anonymous.email, Chat.id.label('chat_id'),
+                      Kit.name.label('kit_name')).filter(User.id == Anonymous.user_id).filter(
+        Chat.user_sub == User.sub).outerjoin(Subject, Subject.user_id == User.id).outerjoin(StudyParticipant,
+                                                                                            StudyParticipant.subject_id == Subject.id).outerjoin(
+        Kit,
+        Kit.id == StudyParticipant.kit_id)
+
     ids = pandas.read_sql_query(
         sql=query,
         con=engine
